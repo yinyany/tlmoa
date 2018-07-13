@@ -1,0 +1,167 @@
+{extend name="/common/base"}
+{block name="content"}
+    {if session('?message')}
+      <blockquote class="layui-elem-quote layui-bg-cyan">{:session('message')}</blockquote>
+      {:session('message', null)} 
+    {/if}
+   <div class="x-body">
+    <form class="layui-form" action="{:url('Customers/createCustomerList')}" method="post" enctype="multipart/form-data">
+      <span class="layui-breadcrumb">
+        <a href="{:url('index/index')}">首页</a>
+        <a>客户管理</a>
+        <a>
+          <cite>添加客户</cite>
+        </a>
+      </span>
+      <button style="float: right" class="layui-btn" lay-filter="add" lay-submit="">
+            增加
+      </button>
+      <button class="layui-btn layui-btn-sm layui-btn-primary">
+        <a href="javascript:history.go(-1)"><i class="layui-icon">&#xe65a;</i> 返回</a>
+      </button>
+        
+      <hr class="layui-bg-gray">
+          <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车主姓名</td>
+              <td>
+                <input type="text" id="username" name="name" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车主电话</td>
+              <td>
+                <input type="text" id="phone" name="phone" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护车辆</td>
+              <td>
+                <input type="text" id="phone" name="car"  required="" lay-verify="required" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车架号</td>
+              <td>
+                <input type="text" id="phone" name="vinno" autocomplete="off" class="layui-input">
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">作业项目</td>
+              <td>
+                <input type="text" id="phone" name="project" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护企业</td>
+              <td>
+                <input type="text" id="username" name="company" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">检验单号</td>
+              <td>
+                <input type="text" id="phone" name="formno" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">登记人员</td>
+              <td>
+                <input type="text" id="phone" name="register" autocomplete="off" class="layui-input">
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护日期</td>
+              <td>
+                <input type="date" id="username" name="maintenancedate" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">检验情况</td>
+              <td>
+                <input type="text" id="phone" name="checkout" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">合格证编号</td>
+              <td>
+                <input type="text" id="username" name="certificate" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">行驶公里数</td>
+              <td>
+                <input type="text" id="phone" name="kilometres" autocomplete="off" class="layui-input">
+              </td>
+            </tr>
+            <tr>
+              
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">进厂时间</td>
+              <td>
+                <input type="date" id="phone" name="startdate" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">进厂公里数</td>
+              <td>
+                <input type="text" id="phone" name="startkilometres" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">出厂公里数</td>
+              <td>
+                <input type="text" id="phone" name="stopkilometres" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">出厂时间</td>
+              <td>
+                <input type="date" id="phone" name="stopdate" autocomplete="off" class="layui-input">
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">质保期</td>
+              <td>
+                <input type="text" id="username" name="warrantydate" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">质保公里数</td>
+              <td>
+                <input type="text" id="username" name="warrantykilometres" autocomplete="off" class="layui-input">
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:90px;">保险到期时间</td>
+              <td colspan="3">
+                <input type="date" id="username" name="insurancestop" autocomplete="off" class="layui-input">
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维修内容</td>
+              <td colspan="3">
+                <textarea style="min-height: 0px;" name="content" placeholder="请输入维修内容" class="layui-textarea"></textarea>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">备注</td>
+              <td colspan="3">
+                <textarea style="min-height: 0px;" name="remarks" placeholder="请输入备注内容" class="layui-textarea"></textarea>
+              </td>
+            </tr>
+          </table>
+          <div class="box1">
+              <div class="controls need-img">
+                  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height:2000px;">
+                    <button type="button" class="layui-btn layui-btn-primary" id="upload_img_icon">上传图片</button>
+                    图片上传:<div class="layui-upload-list" id="demo"></div>
+                 </blockquote>
+              </div>
+          </div>
+      </form>
+    </div>
+    <script>
+         var upurl = "{:url('Customers/doUpload')}"; //上传图片地址
+          layui.use(['layer','upload'], function(){
+              var layer = layui.layer;
+              var upload = layui.upload;
+              upload.render({ //上传图片
+                  elem: '#upload_img_icon',
+                  url: upurl,
+                  multiple: true, //是否允许多文件上传。设置 true即可开启。不支持ie8/9
+                  auto:true,//自动上传
+                  before: function(obj) {
+                      layer.msg('图片上传中...', {
+                          icon: 16,
+                          shade: 0.01,
+                          time: 0
+                      })
+                  },
+                  done: function(res) {
+                      layer.close(layer.msg('上传成功！'));
+                      $('#demo').append('<dd class="upload-icon-img"><div class="upload-pre-item"><i onclick="deleteImg($(this))"   class="layui-icon" style="font-size: 20px"></i><a href='+res.data+' target="view_window"><img style="width:280px;height:280px;" src="'+ res.data +'"class="layui-upload-img"></a><input type="hidden" name="imgurl[]" value="' + res.data + '" /></div></dd>');
+                  }
+                  ,error: function(){
+                      layer.msg('上传错误！');
+                  }
+              });
+
+          });
+          function deleteImg(obj){
+              //删除页面信息
+              obj.parent().parent('.upload-icon-img').remove();
+              //删除本地图片（ajax)
+              //删除数据库图片
+          }
+    </script>
+{/block}

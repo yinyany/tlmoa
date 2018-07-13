@@ -1,0 +1,95 @@
+{extend name="/common/base"}
+{block name="content"}
+    {if session('?message')}
+      <blockquote class="layui-elem-quote layui-bg-cyan">{:session('message')}</blockquote>
+      {:session('message', null)} 
+    {/if}
+   <div class="x-body">
+     <span class="layui-breadcrumb">
+      <a href="{:url('index/index')}">首页</a>
+      <a>用户管理</a>
+      <a>
+        <cite>添加用户</cite></a>
+    </span>
+    <button class="layui-btn layui-btn-sm layui-btn-primary" style="float: right">
+        <a href="javascript:history.go(-1)"><i class="layui-icon">&#xe65a;</i> 返回</a>
+      </button>
+    <hr class="layui-bg-gray">
+        <form class="layui-form" action="{:url('Users/createUserList')}" method="post">
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>用户名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="username" name="name" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+              <input type="radio" name="sex" value="m" title="男">
+              <input type="radio" name="sex" value="w" title="女" checked>
+            </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>手机
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-inline">
+              <select name="role" lay-verify="">
+                <option value="1" disabled>超级用户</option>
+                <option value="2">普通用户</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  6到16个字符
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+                  <span class="x-red">*</span>确认密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_repass" name="password_confirm" required="" lay-verify="repass"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  增加
+              </button>
+          </div>
+      </form>
+      <span style="font-size: 12px;color:red;">
+          {:session('?error')?session('error'):''}
+          {if session('?error')}
+              {:session('error', null)}
+          {/if}
+      </span>
+    </div>
+{/block}

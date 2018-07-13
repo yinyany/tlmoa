@@ -1,0 +1,155 @@
+{extend name="/common/base"}
+{block name="content"}
+   <div class="x-body">
+    <span class="layui-breadcrumb">
+        <a href="{:url('index/index')}">首页</a>
+        <a>客户管理</a>
+        <a>
+          <cite>客户详情</cite>
+        </a>
+      </span>
+      <button class="layui-btn layui-btn-sm layui-btn-primary" style="float: right">
+        <a href="javascript:history.go(-1)"><i class="layui-icon">&#xe65a;</i> 返回</a>
+      </button>
+      <hr class="layui-bg-gray">
+          <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车主姓名</td>
+              <td>
+                <input type="text" id="username" name="name" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['name']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车主电话</td>
+              <td>
+                <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                  autocomplete="off" class="layui-input" value="{$customerlist['phone']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护车辆</td>
+              <td>
+                <input type="text" id="phone" name="car" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['car']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">车架号</td>
+              <td>
+                <input type="text" id="phone" name="vinno" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['vinno']}" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">作业项目</td>
+              <td>
+                <input type="text" id="phone" name="project" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['project']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护企业</td>
+              <td>
+                <input type="text" id="username" name="company" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['company']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">检验单号</td>
+              <td>
+                <input type="text" id="phone" name="formno" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['formno']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">登记人员</td>
+              <td>
+                <input type="text" id="phone" name="register" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['register']}" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维护日期</td>
+              <td>
+                <input type="text" id="username" name="maintenancedate" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['maintenancedate']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">检验情况</td>
+              <td>
+                <input type="text" id="phone" name="checkout" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['checkout']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">合格证编号</td>
+              <td>
+                <input type="text" id="username" name="certificate" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['certificate']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">行驶公里数</td>
+              <td>
+                <input type="text" id="phone" name="kilometres" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['kilometres']}" disabled>
+              </td>
+            </tr>
+            <tr>
+              
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">进厂时间</td>
+              <td>
+                <input type="text" id="phone" name="startdate" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['startdate']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">进厂公里数</td>
+              <td>
+                <input type="text" id="phone" name="startkilometres" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['startkilometres']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">出厂公里数</td>
+              <td>
+                <input type="text" id="phone" name="stopkilometres" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['stopkilometres']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">出厂时间</td>
+              <td>
+                <input type="text" id="phone" name="stopdate" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['stopdate']}" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">质保期</td>
+              <td>
+                <input type="text" id="username" name="warrantydate" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['warrantydate']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">质保公里数</td>
+              <td>
+                <input type="text" id="username" name="warrantykilometres" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['warrantykilometres']}" disabled>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:90px;">保险到期时间</td>
+              <td colspan="3">
+                <input type="text" id="username" name="insurancestop" required="" lay-verify="required"
+                  autocomplete="off" class="layui-input" value="{$customerlist['insurancestop']}" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">维修内容</td>
+              <td colspan="3">
+                <textarea style="min-height: 0px;" name="content" placeholder="请输入维修内容" class="layui-textarea" disabled>{$customerlist['content']}</textarea>
+              </td>
+              <td bgcolor="#eeeeee" style="text-align:right;width:80px;">备注</td>
+              <td colspan="3">
+                <textarea style="min-height: 0px;" name="remarks" placeholder="请输入备注内容" class="layui-textarea" disabled>{$customerlist['remarks']}</textarea>
+              </td>
+            </tr>
+          </table>
+          <div class="box1">
+              <div class="controls need-img">
+                  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height:2000px;">
+                    图片上传:<div class="layui-upload-list" id="demo">
+                    {if $customerlist['imgurl']['0'] !== ''}
+                      {foreach $customerlist['imgurl'] as $imgurl}
+                        <dd class="upload-icon-img">
+                          <div class="upload-pre-item">
+                            <a href="{$imgurl}" target="view_window">
+                              <img style="width:280px;height:280px;" src="{$imgurl}" class="layui-upload-img">
+                            </a>
+                            <input type="hidden" name="imgurl[]" value="{$imgurl}" />
+                          </div>
+                        </dd>
+                      {/foreach}
+                    {/if}
+                    </div>
+                 </blockquote>
+              </div>
+          </div>
+      </form>
+    </div>
+{/block}

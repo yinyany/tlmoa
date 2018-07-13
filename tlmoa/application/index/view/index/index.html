@@ -1,0 +1,103 @@
+{extend name="/common/base"}
+{block name="content"}
+<script type="text/javascript">
+   window.onload = function() {  
+    var show = document.getElementById("show");  
+    setInterval(function() {   
+    var time = new Date();   // 程序计时的月从0开始取值后+1   
+    var m = time.getMonth() + 1;   
+    var t = time.getFullYear() + "-" + m + "-"     
+    + time.getDate() + " " + time.getHours() + ":"     
+    + time.getMinutes() + ":" + time.getSeconds();   
+    show.innerHTML = t;  
+    }, 1000); 
+    };
+</script>
+<div class="x-body layui-anim layui-anim-up">
+    {if session('?message')}
+      <blockquote class="layui-elem-quote layui-bg-cyan">{:session('message')}</blockquote>
+      {:session('message', null)} 
+    {/if}
+        <blockquote class="layui-elem-quote">
+            <span class="x-red">{:session('userInfo')['name']} </span>欢迎您!您现在登陆的是<a style="color:#5FB878;">禹州银都汽车二级维护客户信息管理系统</a>!
+        </blockquote>
+        <fieldset class="layui-elem-field">
+            <legend>数据统计</legend>
+            <div class="layui-field-box">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 90px;">
+                                <div carousel-item="">
+                                    <ul class="layui-row layui-col-space10 layui-this">
+                                            <li class="layui-col-xs2">
+                                                <a href="javascript:;" class="x-admin-backlog-body">
+                                                    <h3>客户总数</h3>
+                                                    <p>
+                                                        <cite>{$num['sum']}</cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs2">
+                                                <a href="javascript:;" class="x-admin-backlog-body">
+                                                    <h3>合格</h3>
+                                                    <p>
+                                                        <cite>{$num['hg']}</cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs2">
+                                                <a href="javascript:;" class="x-admin-backlog-body">
+                                                    <h3>待确认</h3>
+                                                    <p>
+                                                        <cite>{$num['dqr']}</cite></p>
+                                                </a>
+                                            </li>
+                                            <li class="layui-col-xs2">
+                                                <a href="javascript:;" class="x-admin-backlog-body">
+                                                    <h3>不合格</h3>
+                                                    <p>
+                                                        <cite>{$num['nhg']}</cite></p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset class="layui-elem-field">
+            <legend>版权信息</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <tbody>
+                        <tr>
+                            <th>版权所有</th>
+                            <td>&copy 2018 - 2025 &nbsp; 禹州银都汽车二级维护管理系统&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th>技术支持</th>
+                            <td>
+                                <a style="color:#5FB878;">禹州银都汽车二级维护客户信息管理系统</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <blockquote class="layui-elem-quote layui-quote-nm">
+            河南省禹州市银都汽车二级维护客户信息管理系统
+        </blockquote>
+</div>
+<!-- <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script> -->
+
+{/block}

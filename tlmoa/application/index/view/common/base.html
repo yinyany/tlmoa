@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>禹州市银都汽车客户管理系统</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="__CSS__/font.css">
+    <link rel="stylesheet" href="__CSS__/xadmin.css">
+	<link rel="stylesheet" href="__LIB__/layui/css/layui.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__LIB__/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="__JS__/xadmin.js"></script>
+    <script type="text/javascript" src="__JS__/jquery.js"></script>
+    <style type="text/css">
+        .layui-upload-list dd{
+            float: left;
+            margin-left: 12px;
+            margin-top: 5px;
+        }
+        .page-content .layui-tab-content{
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="{:url('index/index')}">银都汽车客户管理系统</a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+        </div>
+        <ul class="layui-nav right" style="height: 45px">
+            <li class="layui-nav-item" style="height: 45px">
+                <a style="height: 45px;line-height: 45px" href="javascript:;">{:session('userInfo')['name']}</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd>
+                    <a href="{:url('Users/viewEditUser',['id'=>session('userInfo')['id']])}">个人信息</a>
+                </dd>
+                <dd>
+                    <a href="{:url('Login/loginout')}">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" style="height: 45px">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li class="layui-nav-item" style="height: 45px;line-height: 45px">
+                当前时间:<span style="width: 175px; line-height: 45px" id="show">{:date('Y-n-j G:i:s',time())}
+                        </span>
+            </li>
+        </ul>
+        
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+     <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+      <div id="side-nav">
+        <ul id="nav">
+            {if session('userInfo')['role'] == '超级用户'}
+            <li class="open">
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>用户管理</cite>
+                </a>
+                <ul class="sub-menu" style="display: block;">
+                    <li {:request()->controller() === 'Users'? "style='background-color:#e2e2e2;'" : ''}
+                    >
+                        <a href="{:url('Users/indexs')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>用户列表</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {/if}
+            <li class="open">
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>客户管理</cite>
+                </a>
+                <ul class="sub-menu" style="display: block;">
+                    <li {:request()->action() === 'index'? "style='background-color:#e2e2e2;'" :''}
+                    >
+                        <a href="{:url('Customers/index')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户列表</cite>
+                        </a>
+                    </li >
+                    <li {:request()->action() === 'viewsearchcustomer' ? "style='background-color:#e2e2e2;'" : ''}
+                    >
+                        <a href="{:url('Customers/viewSearchCustomer')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户搜索</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+          <ul class="layui-tab-title">
+            <li class="home"><a href="{:url('index/index')}"><i class="layui-icon">&#xe68e;</i>我的桌面</a></li>
+          </ul>
+          <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+{block name="content"}
+
+{/block}
+           </div>
+          </div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <!-- 右侧主体结束 -->
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer" style="font-size: 12px; ">
+        <div class="copyright">
+            &copy; 2018 - 2025 &nbsp; 禹州银都汽车二级维护管理系统&nbsp;&nbsp;&nbsp;版权所有  &nbsp;&nbsp;&nbsp;&nbsp;技术支持 : <a style="color:#5FB878;" href="/">禹州银都汽车二级维护客户信息管理系统</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(".clcolor").click(function(){
+            $(this).css("background","#e2e2e2");
+        });
+    </script>
+    <script type="text/javascript"> 
+        window.onload = function() {  
+        var show = document.getElementById("show");
+
+        function tt(n){
+            if(n<10){
+                return '0'+n
+            }else{
+                return n+''
+            }
+        }  
+
+        setInterval(function() {   
+        var time = new Date();   // 程序计时的月从0开始取值后+1   
+        var m = time.getMonth() + 1;   
+        var t = time.getFullYear() + "-" + m + "-"     
+        + time.getDate() + " " + time.getHours() + ":"     
+        + tt(time.getMinutes()) + ":" + tt(time.getSeconds());   
+        show.innerHTML = t;  
+        }, 1000); 
+        };
+    </script>
+</body>
+</html>

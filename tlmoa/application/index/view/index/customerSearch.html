@@ -1,0 +1,117 @@
+{extend name="/common/base"}
+{block name="content"}
+  <div class="x-nav">
+    {if session('?message')}
+      <blockquote class="layui-elem-quote layui-bg-cyan">{:session('message')}</blockquote>
+      {:session('message', null)} 
+    {/if}
+    <span class="layui-breadcrumb">
+      <a href="{:url('index/index')}">首页</a>
+      <a>客户管理</a>
+      <a>
+        <cite>客户搜索</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+      <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+  </div>
+  <div class="x-body">
+    <xblock class="layui-row">
+      <form style="margin-bottom: 0px;" class="layui-form layui-col-md8 x-so" action="{:url('Customers/viewSearchCustomer')}" method="get">
+          <div class="layui-input-inline">
+            <select name="type">
+              {if $where['type'] == ''}
+              <option value="">搜索类别</option>
+              <option value="car">维护车辆</option>
+              <option value="company">维护企业</option>
+              <option value="project">作业项目</option>
+              <option value="checkout">检验情况</option>
+              {/if}
+              {if $where['type'] == 'car'}
+              <option value="">搜索类别</option>
+              <option value="car" selected>维护车辆</option>
+              <option value="company">维护企业</option>
+              <option value="project">作业项目</option>
+              <option value="checkout">检验情况</option>
+              {/if}
+              {if $where['type'] == 'company'}
+              <option value="">搜索类别</option>
+              <option value="car">维护车辆</option>
+              <option value="company" selected>维护企业</option>
+              <option value="project">作业项目</option>
+              <option value="checkout">检验情况</option>
+              {/if}
+              {if $where['type'] == 'project'}
+              <option value="">搜索类别</option>
+              <option value="car">维护车辆</option>
+              <option value="company">维护企业</option>
+              <option value="project" selected>作业项目</option>
+              <option value="checkout">检验情况</option>
+              {/if}
+              {if $where['type'] == 'checkout'}
+              <option value="">搜索类别</option>
+              <option value="car">维护车辆</option>
+              <option value="company">维护企业</option>
+              <option value="project">作业项目</option>
+              <option value="checkout" selected>检验情况</option>
+              {/if}
+            </select>
+          </div>
+          <input type="text" name="val"  placeholder="请输入分类信息" autocomplete="off" class="layui-input" value="{$where['val']}">
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      <span class="x-right" style="line-height:40px">共有数据：{$count?$count:''}条</span>
+    </xblock>
+    <table class="layui-table" >
+      <thead>
+        <tr>
+          <th style="font-size: 12px;">维护车辆</th>
+          <th style="font-size: 12px;">维护企业</th>
+          <th style="font-size: 12px;">进厂日期</th>
+          <th style="font-size: 12px;">进厂公里数</th>
+          <th style="font-size: 12px;">作业项目</th>
+          <th style="font-size: 12px;">检验情况</th>
+          <th style="font-size: 12px;">合格证编号</th>
+          <th style="font-size: 12px;">出厂日期</th>
+          <th style="font-size: 12px;">出厂公里数</th>
+          <th style="font-size: 12px;">操作</th>
+      </thead>
+      <tbody>
+          {foreach $customerlist as $customer}
+          <tr>
+            <td style="font-size: 12px;"><a style="color:#ff5722;" title="查看详情" href="{:url('Customers/viewDetailCustomer',['id'=>$customer.id])}">{$customer.car}</a></td>
+            <td style="font-size: 12px;">{$customer.company}</td>
+            <td style="font-size: 12px;">{$customer.startdate}</td>
+            <td style="font-size: 12px;">{$customer.startkilometres}</td>
+            <td style="font-size: 12px;">{$customer.project}</td>
+            <td style="font-size: 12px;">{$customer.checkout}</td>
+            <td style="font-size: 12px;">{$customer.certificate}</td>
+            <td style="font-size: 12px;">{$customer.stopdate}</td>
+            <td style="font-size: 12px;">{$customer.stopkilometres}</td>
+            <td class="td-manage">
+              {if session('userInfo')['role'] == '超级用户'}
+                <a title="编辑"  href="{:url('Customers/viewEditCustomer',['id'=>$customer.id])}">
+                  <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" href="{:url('Customers/deleteCustomer',['id'=>$customer.id])}">
+                  <i class="layui-icon">&#xe640;</i>
+                </a>
+              {else /}
+                <em style="font-style:normal;font-size: 12px">&nbsp;</em>
+              {/if}
+            </td>
+          </tr>
+          {/foreach}
+      </tbody>
+    </table>
+    <div class="page">
+          <!-- 分页 -->
+          {$customerlist->render()}
+    </div>
+  </div>
+<!--   <script>
+   layui.use('laydate', function(){
+        var laydate = layui.laydate;
+      
+    }
+  </script> -->
+{/block}

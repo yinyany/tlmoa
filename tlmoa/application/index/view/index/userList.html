@@ -1,0 +1,74 @@
+{extend name="/common/base"}
+{block name="content"}
+  <div class="x-nav">
+    {if session('?message')}
+      <blockquote class="layui-elem-quote layui-bg-cyan">{:session('message')}</blockquote>
+      {:session('message', null)} 
+    {/if}
+    
+    <span class="layui-breadcrumb">
+      <a href="{:url('index/index')}">首页</a>
+      <a>用户管理</a>
+      <a>
+        <cite>用户列表</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+      <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+  </div>
+  <div class="x-body">
+    <xblock class="layui-row">
+      {if session('userInfo')['role'] == '超级用户'}
+        <a class="layui-btn" href="{:url('Users/viewCreateUser')}"><i class="layui-icon"></i>添加</a>
+      {/if}
+      <form style="margin-bottom: 0px;" class="layui-form layui-col-md3 x-so" method="get" action="{:url('Users/indexs')}">
+        <input type="text" name="name"  placeholder="请输入用户名" autocomplete="off" class="layui-input" value="{$where?$where:''}">
+        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+      </form>
+      <span class="x-right" style="line-height:40px">共有数据：{$count}条</span>
+    </xblock>
+    <table class="layui-table">
+      <thead>
+        <tr>
+          <th style="font-size: 12px;">用户名</th>
+          <th style="font-size: 12px;">性别</th>
+          <th style="font-size: 12px;">手机</th>
+          <th style="font-size: 12px;">角色</th>
+          <th style="font-size: 12px;">加入时间</th>
+          <th style="font-size: 12px;">操作</th>
+      </thead>
+      <tbody>
+        {foreach $userlist as $user}
+        <tr>
+          <td style="font-size: 12px;">{$user.name}</td>
+          <td style="font-size: 12px;">{$user.sex}</td>
+          <td style="font-size: 12px;">{$user.phone}</td>
+          <td style="font-size: 12px;">{$user.role}</td>
+          <td style="font-size: 12px;">{$user.create_time}</td>
+          <td class="td-manage">
+            {if session('userInfo')['role'] == '超级用户'}
+              <a title="编辑"  href="{:url('Users/viewEditUser',['id'=>$user.id])}">
+                <i class="layui-icon">&#xe642;</i>
+              </a>
+              <a title="删除" href="{:url('Users/deleteUser',['id'=>$user.id])}">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            {else /}
+              <em style="font-style:normal;font-size: 12px">&nbsp;</em>
+            {/if}
+          </td>
+        </tr>
+        {/foreach}
+      </tbody>
+    </table>
+    <div class="page">
+          <!-- 分页 -->
+          {$userlist->render()}
+    </div>
+  </div>
+ <!--  <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+    }
+  </script> -->
+{/block}
